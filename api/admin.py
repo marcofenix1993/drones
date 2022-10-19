@@ -1,3 +1,14 @@
 from django.contrib import admin
+from django.contrib.admin import ModelAdmin
 
-# Register your models here.
+from api.models import Drone, Medication
+
+
+@admin.register(Drone)
+class DroneAdmin(ModelAdmin):
+    pass
+
+
+@admin.register(Medication)
+class MedicationAdmin(ModelAdmin):
+    pass

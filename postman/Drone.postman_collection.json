@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "c293d495-b3ed-4160-b4c5-278c7e26317d",
+		"name": "Drone",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9193293"
+	},
+	"item": [
+		{
+			"name": "Create drone",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"serial_number\": \"dfasddfag\",\n    \"model\": \"Lightweight\",\n    \"weight_limit\": 200,\n    \"battery_capacity\": 0.8,\n    \"state\": \"LOADED\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/drones",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"drones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List of drones",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/drones",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"drones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add medication",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\"KNKNJK\",\"HDNMC\"]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/drones/{{drone_id}}/add_medications",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"drones",
+						"{{drone_id}}",
+						"add_medications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Medications by drone",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/drones/{{drone_id}}/medications",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"drones",
+						"{{drone_id}}",
+						"medications"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "drone_id",
+			"value": "xvxcbsdfg"
+		}
+	]
+}

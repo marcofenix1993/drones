@@ -26,6 +26,8 @@ tbd
 - `GET drones/<drone_id>/medications`: get list of medications by drone id (drone_id)
 - `GET api/medications`: get list of medications
 
+> Note: The postman collections can be found in the directory *./postman*
+
 ## Author
 
 - [Raciel](http://website)

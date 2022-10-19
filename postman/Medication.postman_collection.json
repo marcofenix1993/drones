@@ -1,0 +1,30 @@
+{
+	"info": {
+		"_postman_id": "0b209699-6463-4829-a586-36d19614344c",
+		"name": "Medication",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9193293"
+	},
+	"item": [
+		{
+			"name": "List of medications",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/medications",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"medications"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

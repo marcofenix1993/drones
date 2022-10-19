@@ -21,3 +21,13 @@ def load_medications(drone_id, medications_ids):
         new_package.medications = medication
         new_package.active = True
         new_package.save()
+
+
+def drone_medications_list(drone_id):
+    # todo: check that drone exist
+    drone = Drone.objects.get(pk=drone_id)
+    packages = Package.objects.filter(active=True, drone_id=drone_id)
+    medications = []
+    for package in packages:
+        medications.append(package.medications)
+    return medications

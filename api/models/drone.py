@@ -5,7 +5,7 @@ StateType = models.TextChoices('StateType', 'IDLE LOADING LOADED DELIVERING DELI
 
 
 class Drone(models.Model):
-    serial_number = models.CharField(max_length=100, default='', null=False)
+    serial_number = models.CharField(max_length=100, default='', null=False, primary_key=True)
     medal = models.CharField(blank=True, choices=ModelType.choices, max_length=100)
     weight_limit = models.IntegerField()
     battery_capacity = models.FloatField()

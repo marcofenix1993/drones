@@ -1,0 +1,44 @@
+[
+  {
+    "model": "api.medication",
+    "pk": "KJHSDFAD",
+    "fields": {
+      "name": "Medication 1",
+      "weight": 5,
+      "image_url": "1.jpg"
+    }
+  },{
+    "model": "api.medication",
+    "pk": "OPIJSDF",
+    "fields": {
+      "name": "Medication 2",
+      "weight": 20,
+      "image_url": "2.jpg"
+    }
+  },{
+    "model": "api.medication",
+    "pk": "YUIKDHSN",
+    "fields": {
+      "name": "Medication 3",
+      "weight": 34,
+      "image_url": "3.jpg"
+    }
+  },{
+    "model": "api.medication",
+    "pk": 4,
+    "fields": {
+      "name": "Medication 4",
+      "code": "HDNMC",
+      "weight": 50,
+      "image_url": "4.jpg"
+    }
+  },{
+    "model": "api.medication",
+    "pk": "KNKNJK",
+    "fields": {
+      "name": "Medication 5",
+      "weight": 15,
+      "image_url": "5.jpg"
+    }
+  }
+]

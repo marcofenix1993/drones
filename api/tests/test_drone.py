@@ -19,8 +19,27 @@ class DroneTestCase(TestCase):
 
     def setUp(self):
         self.invalid_serial_number = get_random_string(101)
+        self.drone = Drone()
+        self.drone.serial_number = "ae25"
+        self.drone.weight_limit = 500
 
     def test_serial_number(self):
         with self.assertRaises(DataError):
-            Drone.objects.create(serial_number=self.invalid_serial_number)
+            Drone.objects.create(serial_number=self.invalid_serial_number, model='Lightweight', weight_limit=490,
+                                 state='IDLE')
 
+    def test_weight_limit(self):
+        with self.assertRaises(ValidationError) as e:
+            self.drone.weight_limit = 505
+            self.drone.battery_capacity = 1
+            self.drone.full_clean()
+            self.drone.save()
+        self.assertEqual(e.exception.message_dict['weight_limit'][0], 'Weight value must be in range [0-500]')
+
+    def test_battery_capacity(self):
+        with self.assertRaises(ValidationError) as e:
+            self.drone.battery_capacity = 5
+            self.drone.full_clean()
+            self.drone.save()
+        self.assertEqual(e.exception.message_dict['battery_capacity'][0],
+                         'Battery capacity value must be between 0 and 1')

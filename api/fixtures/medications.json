@@ -5,7 +5,7 @@
     "fields": {
       "name": "Medication 1",
       "weight": 5,
-      "image_url": "1.jpg"
+      "image_url": "medications/1.jpeg"
     }
   },{
     "model": "api.medication",
@@ -13,7 +13,7 @@
     "fields": {
       "name": "Medication 2",
       "weight": 20,
-      "image_url": "2.jpg"
+      "image_url": "medications/2.jpeg"
     }
   },{
     "model": "api.medication",
@@ -21,7 +21,7 @@
     "fields": {
       "name": "Medication 3",
       "weight": 34,
-      "image_url": "3.jpg"
+      "image_url": "medications/3.jpeg"
     }
   },{
     "model": "api.medication",
@@ -30,7 +30,7 @@
       "name": "Medication 4",
       "code": "HDNMC",
       "weight": 50,
-      "image_url": "4.jpg"
+      "image_url": "medications/4.jpeg"
     }
   },{
     "model": "api.medication",
@@ -38,7 +38,7 @@
     "fields": {
       "name": "Medication 5",
       "weight": 15,
-      "image_url": "5.jpg"
+      "image_url": "medications/5.jpeg"
     }
   }
 ]

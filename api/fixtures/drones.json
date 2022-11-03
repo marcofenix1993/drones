@@ -1,0 +1,12 @@
+[
+  {
+    "model": "api.drone",
+    "pk": "A3625",
+    "fields": {
+      "model": "Lightweight",
+      "weight_limit": 30,
+      "battery_capacity": 1,
+      "state": "IDLE"
+    }
+  }
+]

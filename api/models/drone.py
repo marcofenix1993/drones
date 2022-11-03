@@ -20,3 +20,11 @@ class Drone(models.Model):
         self.weight_limit = fields['weight_limit']
         self.battery_capacity = fields['battery_capacity']
         self.state = fields['state']
+
+    def can_load(self):
+        return self.battery_capacity >= 0.25 and self.state == 'IDLE'
+
+    def is_valid(self):
+        if self.state == 'LOADING' and self.battery_capacity < 0.25:
+            return False
+        return True

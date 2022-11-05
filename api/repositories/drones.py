@@ -21,10 +21,10 @@ def load_medications(drone_id, medications_ids):
         raise Exception("The drone can't load the medication. Battery low.")
     current_weight = sum(
         [package.medications.weight for package in Package.objects.filter(active=True, drone_id=drone_id)])
-    MedicationsQuery = Medication.objects.filter(pk__in=medications_ids)
-    if not MedicationsQuery.exists():
+    medications_query = Medication.objects.filter(pk__in=medications_ids)
+    if not medications_query.exists():
         raise Exception("Invalid Medication")
-    weight_to_load = MedicationsQuery.aggregate(Sum('weight')).get('weight__sum', 0)
+    weight_to_load = medications_query.aggregate(Sum('weight')).get('weight__sum', 0)
     if current_weight + weight_to_load > drone.weight_limit:
         raise Exception("The weight to be loaded exceeds the weight limit of the drone")
     drone.state = "LOADING"

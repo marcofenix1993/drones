@@ -1,11 +1,12 @@
+import json
 import random
 import string
 
 from django.core.exceptions import ValidationError
 from django.db import DataError
-from django.test import TestCase
+from django.test import Client, TestCase
 
-from api.models import Drone
+from api.models import Drone, Medication, Package
 
 
 def get_random_string(length):
@@ -16,12 +17,15 @@ def get_random_string(length):
 
 
 class DroneTestCase(TestCase):
+    fixtures = ['api/fixtures/medications.json']
 
     def setUp(self):
         self.invalid_serial_number = get_random_string(101)
         self.drone = Drone()
         self.drone.serial_number = "ae25"
-        self.drone.weight_limit = 500
+        self.drone.weight_limit = 50
+        self.drone.battery_capacity = 1
+        self.drone.state = "IDLE"
 
     def test_serial_number(self):
         with self.assertRaises(DataError):
@@ -43,3 +47,23 @@ class DroneTestCase(TestCase):
             self.drone.save()
         self.assertEqual(e.exception.message_dict['battery_capacity'][0],
                          'Battery capacity value must be between 0 and 1')
+
+    def test_weight_limit_exceeded(self):
+        c = Client()
+        self.drone.full_clean()
+        self.drone.save()
+        medication = Medication.objects.get(pk="YUOPTFSN")
+        new_package = Package()
+        new_package.drone = self.drone
+        new_package.medications = medication
+        new_package.active = True
+        new_package.save()
+        post_data = ["KNKNJK"]
+        response = c.post(f'/api/drones/{self.drone.serial_number}/add_medications', json.dumps(post_data), content_type="application/json")
+        self.assertEqual(response.status_code, 400)
+        self.assertDictEqual(response.json(), {'error': 'The weight to be loaded exceeds the weight limit of the drone'})
+
+    def test_battery_low_prevent_loading(self):
+        self.drone.battery_capacity = 0.24
+        self.drone.state = "LOADING"
+        self.assertEqual(self.drone.can_load(), False)

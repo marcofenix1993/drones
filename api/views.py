@@ -1,5 +1,6 @@
 import json
 from django.core import serializers
+from django.core.exceptions import ValidationError
 from django.http import JsonResponse, HttpResponse, HttpResponseForbidden
 
 from api.models import Drone
@@ -20,9 +21,13 @@ def drones_list(request):
         drone.from_json(json.loads(request.body))
         if not drone.is_valid():
             return JsonResponse({
-                "error": "Battery low, low battery, the drone can't be in loading state",
+                "error": "Battery low, the drone can't be in loading state",
             }, status=400)
-        drone.save()
+        try:
+            drone.full_clean()
+            drone.save()
+        except ValidationError as e:
+            return JsonResponse({"errors": e.message_dict}, safe=False, status=400)
         data = serializers.serialize('json', [drone],
                                      fields=('serial_number', 'medal', 'weight_limit', 'battery_capacity', 'state'))
         return JsonResponse(json.loads(data), safe=False, status=201)
@@ -44,10 +49,15 @@ def add_medications_to_drone(request, drone_id):
 
 def medications_by_drone(request, drone_id):
     if request.method == 'GET':
-        medications = drone_medications_list(drone_id)
-        data = serializers.serialize('json', medications,
-                                     fields=('name', 'code', 'weight', 'image_url'))
-        return JsonResponse(json.loads(data), safe=False)
+        try:
+            medications = drone_medications_list(drone_id)
+            data = serializers.serialize('json', medications,
+                                         fields=('name', 'code', 'weight', 'image_url'))
+            return JsonResponse(json.loads(data), safe=False)
+        except Drone.DoesNotExist as e:
+            return JsonResponse({
+                "error": e.args[0],
+            }, status=404)
     return HttpResponseForbidden()
 
 
@@ -80,7 +90,12 @@ def battery_level_history(request):
 
 def drone_battery_level(request, drone_id):
     if request.method == 'GET':
-        drone = get_drone_by_id(drone_id)
+        try:
+            drone = get_drone_by_id(drone_id)
+        except Drone.DoesNotExist as e:
+            return JsonResponse({
+                "error": e.args[0],
+            }, status=404)
         data = serializers.serialize('json', [drone],
                                      fields=('battery_capacity'))
         return JsonResponse(json.loads(data), safe=False)

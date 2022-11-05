@@ -25,10 +25,9 @@
     }
   },{
     "model": "api.medication",
-    "pk": 4,
+    "pk": "YUOPTFSN",
     "fields": {
       "name": "Medication 4",
-      "code": "HDNMC",
       "weight": 50,
       "image_url": "medications/4.jpeg"
     }

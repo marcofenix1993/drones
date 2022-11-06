@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "c293d495-b3ed-4160-b4c5-278c7e26317d",
+		"_postman_id": "d60a1449-a999-45be-9305-5128191b180c",
 		"name": "Drone",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "9193293"
+		"_exporter_id": "24169883"
 	},
 	"item": [
 		{
@@ -119,6 +119,57 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Availables drones for loading",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Drone battery level",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/drones/{{drone_id}}/battery_level",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"drones",
+						"{{drone_id}}",
+						"battery_level"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Battery Level History",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/drones/battery_level_history",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"drones",
+						"battery_level_history"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -144,7 +195,8 @@
 	"variable": [
 		{
 			"key": "drone_id",
-			"value": "xvxcbsdfg"
+			"value": "A3625",
+			"type": "string"
 		}
 	]
 }

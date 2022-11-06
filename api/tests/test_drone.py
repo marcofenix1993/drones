@@ -17,7 +17,7 @@ def get_random_string(length):
 
 
 class DroneTestCase(TestCase):
-    fixtures = ['api/fixtures/medications.json']
+    fixtures = ['api/fixtures/medications.json', 'api/tests/fixtures/test_drone.json']
 
     def setUp(self):
         self.invalid_serial_number = get_random_string(101)
@@ -67,3 +67,26 @@ class DroneTestCase(TestCase):
         self.drone.battery_capacity = 0.24
         self.drone.state = "LOADING"
         self.assertEqual(self.drone.can_load(), False)
+
+    def test_drone_limit(self):
+        c = Client()
+        post_data = {
+            "serial_number": "def45",
+            "model": "Lightweight",
+            "weight_limit": 500,
+            "battery_capacity": 1,
+            "state": "IDLE"
+        }
+        response = c.post('/api/drones', json.dumps(post_data), content_type='application/json')
+        self.assertEqual(response.status_code, 201)
+        post_data = {
+            "serial_number": "def53",
+            "model": "Lightweight",
+            "weight_limit": 500,
+            "battery_capacity": 1,
+            "state": "IDLE"
+        }
+        response = c.post('/api/drones', json.dumps(post_data), content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+        self.assertDictEqual(response.json(),
+                             {'error': 'Maximum amount of drones allowed is 10'})

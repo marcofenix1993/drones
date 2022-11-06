@@ -1,0 +1,92 @@
+[
+  {
+    "model": "api.drone",
+    "pk": "TESTDRONE1",
+    "fields": {
+      "model": "Lightweight",
+      "weight_limit": 30,
+      "battery_capacity": 1,
+      "state": "IDLE"
+    }
+  },
+  {
+    "model": "api.drone",
+    "pk": "TESTDRONE2",
+    "fields": {
+      "model": "Lightweight",
+      "weight_limit": 30,
+      "battery_capacity": 1,
+      "state": "IDLE"
+    }
+  },
+  {
+    "model": "api.drone",
+    "pk": "TESTDRONE3",
+    "fields": {
+      "model": "Lightweight",
+      "weight_limit": 30,
+      "battery_capacity": 1,
+      "state": "IDLE"
+    }
+  },
+  {
+    "model": "api.drone",
+    "pk": "TESTDRONE4",
+    "fields": {
+      "model": "Lightweight",
+      "weight_limit": 30,
+      "battery_capacity": 1,
+      "state": "IDLE"
+    }
+  },
+  {
+    "model": "api.drone",
+    "pk": "TESTDRONE5",
+    "fields": {
+      "model": "Lightweight",
+      "weight_limit": 30,
+      "battery_capacity": 1,
+      "state": "IDLE"
+    }
+  },
+  {
+    "model": "api.drone",
+    "pk": "TESTDRONE6",
+    "fields": {
+      "model": "Lightweight",
+      "weight_limit": 30,
+      "battery_capacity": 1,
+      "state": "IDLE"
+    }
+  },
+  {
+    "model": "api.drone",
+    "pk": "TESTDRONE7",
+    "fields": {
+      "model": "Lightweight",
+      "weight_limit": 30,
+      "battery_capacity": 1,
+      "state": "IDLE"
+    }
+  },
+  {
+    "model": "api.drone",
+    "pk": "TESTDRONE8",
+    "fields": {
+      "model": "Lightweight",
+      "weight_limit": 30,
+      "battery_capacity": 1,
+      "state": "IDLE"
+    }
+  },
+  {
+    "model": "api.drone",
+    "pk": "TESTDRONE9",
+    "fields": {
+      "model": "Lightweight",
+      "weight_limit": 30,
+      "battery_capacity": 1,
+      "state": "IDLE"
+    }
+  }
+]

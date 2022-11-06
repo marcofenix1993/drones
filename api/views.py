@@ -11,12 +11,16 @@ from api.repositories.medications import get_medications_list
 
 
 def drones_list(request):
+    drones_set = get_drones_list()
     if request.method == 'GET':
-        drones_set = get_drones_list()
         data = serializers.serialize('json', drones_set,
                                      fields=('serial_number', 'model', 'weight_limit', 'battery_capacity', 'state'))
         return JsonResponse(json.loads(data), safe=False)
     elif request.method == 'POST':
+        if len(drones_set) == 10:
+            return JsonResponse({
+                "error": "Maximum amount of drones allowed is 10",
+            }, status=400)
         drone = Drone()
         drone.from_json(json.loads(request.body))
         if not drone.is_valid():

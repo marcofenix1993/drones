@@ -1,0 +1,63 @@
+import json
+
+from django.db import models
+from polymorphic.models import PolymorphicModel #pip install django-polymorphic
+
+
+class UnitOfMeasure(PolymorphicModel):
+
+    def convert_to_gr(self, value):
+        pass
+
+
+class Grams(UnitOfMeasure):
+
+    def convert_to_gr(self, value):
+        return value
+
+
+class Kilograms(UnitOfMeasure):
+
+    def convert_to_gr(self, value):
+        return value * 1000
+
+class LoadFactory:
+
+    @staticmethod
+    def load_factory(type):
+        if type == 'medication':
+            return Medication
+        if type == 'sport_tool':
+            return SportTool
+
+
+class Load(PolymorphicModel):
+    weight = models.IntegerField()
+    weight_uom = models.ForeignKey(UnitOfMeasure, on_delete=models.CASCADE)
+
+
+class Medication(Load):
+    weight_uom = models.ForeignKey(Grams, on_delete=models.CASCADE)
+
+
+class SportTool(Load):
+    weight_uom = models.ForeignKey(Kilograms, on_delete=models.CASCADE)
+
+
+class Package(models.Model):
+    load = models.ForeignKey(Load, on_delete=models.CASCADE)
+
+
+#api/repositories/drones.py
+#manage different types of load
+def load_medications(drone_id, medications_ids):
+    #......
+    weight_to_load = [package.load.weight_uom.convert_to_gr(package.load.weight) for package in Package.objects.filter(drone_id=drone_id)]
+
+#Add different types of Load, every load can have a different unit of measure
+def add_load(request, drone_id):
+    #.......
+    data = json.loads(request.body)
+    type = data['type'] #type of load
+    load = LoadFactory().load_factory(type)
+    package = Package.objects.create(load=load().objects.create(weight=20))

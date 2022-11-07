@@ -43,7 +43,9 @@ def add_medications_to_drone(request, drone_id):
         medications_ids = json.loads(request.body)
         try:
             load_medications(drone_id, medications_ids)
-            return HttpResponse("done", status=200)
+            return JsonResponse({
+                "message": "Medications loaded",
+            }, status=200)
         except Exception as e:
             return JsonResponse({
                 "error": e.args[0],

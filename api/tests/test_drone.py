@@ -2,11 +2,10 @@ import json
 import random
 import string
 
+from api.models import Drone, Medication, Package
 from django.core.exceptions import ValidationError
 from django.db import DataError
 from django.test import Client, TestCase
-
-from api.models import Drone, Medication, Package
 
 
 def get_random_string(length):

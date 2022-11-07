@@ -1,6 +1,5 @@
+from api.models import Drone, Medication, Package
 from django.db.models import Sum
-
-from api.models import Drone, Package, Medication
 
 
 def get_drones_list():

@@ -1,5 +1,5 @@
-from django.db import models
 from api.models import Drone, Medication
+from django.db import models
 
 
 class Package(models.Model):

@@ -1,12 +1,14 @@
 import json
+
 from django.core import serializers
 from django.core.exceptions import ValidationError
-from django.http import JsonResponse, HttpResponse, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseForbidden, JsonResponse
 
 from api.models import Drone
 from api.repositories.battery_level_history import battery_level_history_list
-from api.repositories.drones import get_drones_list, load_medications, drone_medications_list, available_drones_list, \
-    get_drone_by_id
+from api.repositories.drones import (available_drones_list,
+                                     drone_medications_list, get_drone_by_id,
+                                     get_drones_list, load_medications)
 from api.repositories.medications import get_medications_list
 
 

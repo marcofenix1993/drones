@@ -1,6 +1,8 @@
 from django.urls import path
-from api.views import drones_list, medications_list, add_medications_to_drone, medications_by_drone, available_drones, \
-    drone_battery_level, battery_level_history
+
+from api.views import (add_medications_to_drone, available_drones,
+                       battery_level_history, drone_battery_level, drones_list,
+                       medications_by_drone, medications_list)
 
 urlpatterns = [
     path('drones', drones_list),

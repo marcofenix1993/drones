@@ -29,6 +29,17 @@ docker-compose exec web python manage.py loaddata drones.json (optional, drone c
 docker-compose exec web python manage.py loaddata medications.json
 ```
 
+## Run tests
+
+```
+docker-compose exec web python manage.py test
+```
+
+## Run periodic task "check drone battery level" manually
+
+```
+docker-compose exec web celery -A dronesAPI worker -l info -B
+```
 
 ## Endpoints documentation
 

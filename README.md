@@ -2,7 +2,52 @@
 
 Test for Musala
 
-## Setting up project
+## Setting up project locally with python venv
+
+### Install dependencies
+
+```
+Create python venv
+source venv/bin/activate
+pip install -r requirements.txt
+sudo apt install redis
+sudo apt-get install postgresql postgresql-client
+sudo -u postgres -i
+createdb hello_django
+psql
+postgres=# CREATE USER hello_django WITH PASSWORD 'hello_django';
+postgres=# GRANT ALL ON DATABASE hello_django TO hello_django;
+
+```
+
+### Run migrations
+
+```
+python manage.py migrate
+```
+
+## Load data in db (fixtures)
+
+```
+python manage.py loaddata drones.json (optional, drone can be created by api)
+python manage.py loaddata medications.json
+```
+
+## Run tests
+
+```
+python manage.py test
+```
+
+## Run periodic task "check drone battery level" manually
+
+```
+celery -A dronesAPI worker -l info -B
+```
+
+
+
+## Setting up project with docker
 
 ### Install dependencies
 

@@ -27,9 +27,9 @@ class DroneTestCase(TestCase):
         self.drone.state = "IDLE"
 
     def test_serial_number(self):
-        with self.assertRaises(DataError):
-            Drone.objects.create(serial_number=self.invalid_serial_number, model='Lightweight', weight_limit=490,
-                                 state='IDLE')
+        with self.assertRaises(ValidationError):
+            self.drone.serial_number = self.invalid_serial_number
+            self.drone.full_clean()
 
     def test_weight_limit(self):
         with self.assertRaises(ValidationError) as e:
@@ -58,9 +58,11 @@ class DroneTestCase(TestCase):
         new_package.active = True
         new_package.save()
         post_data = ["KNKNJK"]
-        response = c.post(f'/api/drones/{self.drone.serial_number}/add_medications', json.dumps(post_data), content_type="application/json")
+        response = c.post(f'/api/drones/{self.drone.serial_number}/add_medications', json.dumps(post_data),
+                          content_type="application/json")
         self.assertEqual(response.status_code, 400)
-        self.assertDictEqual(response.json(), {'error': 'The weight to be loaded exceeds the weight limit of the drone'})
+        self.assertDictEqual(response.json(),
+                             {'error': 'The weight to be loaded exceeds the weight limit of the drone'})
 
     def test_battery_low_prevent_loading(self):
         self.drone.battery_capacity = 0.24

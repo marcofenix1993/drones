@@ -33,6 +33,12 @@ python manage.py loaddata drones.json (optional, drone can be created by api)
 python manage.py loaddata medications.json
 ```
 
+## Start project (in dev)
+
+```
+python manage.py runserver
+```
+
 ## Run tests
 
 ```
